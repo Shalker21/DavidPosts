@@ -61,6 +61,10 @@
 			$single = $this->postModel->single($id);
 			$users = $this->userModel->allUsers();
 
+			if(!$single) {
+				echo "DA";
+			}
+
 			$data = [
 				'single' => $single,
 				'users' => $users
