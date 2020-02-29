@@ -56,14 +56,12 @@
 		}
 
 		public function single() {
-			$id = substr($_GET['url'], -1);
+			// Tu je nastala greška => ISPRAVLJENO
+			$exp = explode('/' , $_GET['url']);
+			$id = end($exp);
 
 			$single = $this->postModel->single($id);
 			$users = $this->userModel->allUsers();
-
-			if(!$single) {
-				echo "DA";
-			}
 
 			$data = [
 				'single' => $single,

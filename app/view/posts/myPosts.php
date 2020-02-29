@@ -7,9 +7,7 @@
 
 	<div class="row">
 
-		
-
-		<?php foreach((array)$data['post'] as $post) : ?>
+		<?php foreach($data['post'] as $post) : ?>
 				
 				<div class="col-md-12">
 					<div class="card m-3 bg-light">
