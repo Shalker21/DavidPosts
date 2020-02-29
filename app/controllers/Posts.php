@@ -71,7 +71,7 @@
 
 		public function addPost() {
 			// Ako je forma submitana
-			if($_SERVER['REQEST_METHOD'] == 'POST') {
+			if($_SERVER['REQUEST_METHOD'] == 'POST') {
 				$data = [
 					'user_id' => $_SESSION['user_id'],
 					'title' => trim($_POST['title']),
@@ -148,23 +148,43 @@
 			}
 		}
 
-		// Function for Hide Post
-		public function hidePost() {
+		public function deletePost() {
 			$id = substr($_GET['url'], -1);
-			
-			$single = $this->postModel->single($id);
-			$posts = $this->postModel->myPosts($_SESSION['user_id']); 
-			$users = $this->userModel->allUsers();
+			// Ako je usmjesno obrisani
+			if($this->postModel->deletePost($id)) {
+	
+				$posts = $this->postModel->allPosts(); 
+				$users = $this->userModel->allUsers();
 
-			$_SESSION['hidden_post_id'] = $single->id;
-			$data = [
-				'hidden_post_id' => $_SESSION['hidden_post_id'],
-				'single' => $single,
-				'posts' => $posts,
-				'users' => $users
-			];
+				$_SESSION['deleted_post_id'] = $id;
 
-			
-			$this->view('posts/myPosts', $data);
+				$data = [
+					'deleted_post_id' => $_SESSION['deleted_post_id'],
+					'post' => $posts,
+					'user' => $users
+				];
+
+				$this->view('posts/allPosts', $data);
+			}
 		}
+
+		// Function for Hide Post
+		// public function hidePost() {
+		// 	$id = substr($_GET['url'], -1);
+			
+		// 	$single = $this->postModel->single($id);
+		// 	$posts = $this->postModel->myPosts($_SESSION['user_id']); 
+		// 	$users = $this->userModel->allUsers();
+
+		// 	$_SESSION['hidden_post_id'] = $single->id;
+		// 	$data = [
+		// 		'hidden_post_id' => $_SESSION['hidden_post_id'],
+		// 		'single' => $single,
+		// 		'posts' => $posts,
+		// 		'users' => $users
+		// 	];
+
+			
+		// 	$this->view('posts/myPosts', $data);
+		// }
 	}

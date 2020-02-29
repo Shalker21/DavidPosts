@@ -7,26 +7,16 @@
 
 	<div class="row">
 
-		<?php if(isset($data['hidden_post_id'])) : ?>
-			<div class="col-md-12">
-				<div class="card m-3 bg-light">
-					<div class="card-body">
-						<h4><?=$data['single']->title;?></h4>
-					</div>
-				</div>
-			</div>
-		<?php endif; ?>
+		
 
-		<?php foreach($data['posts'] as $post) : ?>
-
-			<?php if(!isset($data['hidden_post_id'])) : ?>
+		<?php foreach((array)$data['post'] as $post) : ?>
 				
 				<div class="col-md-12">
 					<div class="card m-3 bg-light">
 						<div class="card-body">
-							<h4><?=$post->title;?></h4>
+							<h4><?=$post->title?></h4>
 							<p><?=$post->body;?></p>
-							<?php foreach($data['users'] as $user) : ?>
+							<?php foreach($data['user'] as $user) : ?>
 								<?php if($user->id == $post->user_id) : ?>
 									
 									<small>Created by: <?=$user->first_name . ' ' . $user->last_name?></small>
@@ -38,11 +28,10 @@
 					</div>
 				</div>
 
-			<?php endif; ?>
-
-			
-
 		<?php endforeach;?>
 	</div>
+
+
+
 
 <?php require APPROOT . '/view/inc/footer.php' ?>

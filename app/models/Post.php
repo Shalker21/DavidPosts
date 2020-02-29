@@ -67,17 +67,14 @@
 			}
 		}
 
-		// ---------
-		// SREDITI FUNKCIJU ZA DELETE!!
-		// ---------
-		// public function deletePost($id) {
-		// 	$this->db->query("DELETE posts WHERE id = :id");
-		// 	$this->db->bind(':id', $id);
+		public function deletePost($id) {
+			$this->db->query("DELETE FROM posts WHERE id = :id");
+			$this->db->bind(':id', $id);
 			
-		// 	if($this->db->execute()) {
-		// 		return true;
-		// 	} else {
-		// 		return false;
-		// 	}
-		// }
+			if($this->db->execute()) {
+				return true;
+			} else {
+				return false;
+			}
+		}
 	}

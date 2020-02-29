@@ -7,6 +7,16 @@
 
 	<div class="row">
 
+		<!-- ALERT ZA USPJESNO OBRISANI POST  -->
+		<?php if(isset($data['deleted_post_id'])) : ?>
+			
+			<div class="col-md-12" id="success-alert">
+				<div class="alert alert-success">Uspješno ste obrisali željeni post!</div>
+			</div>
+
+		<?php endif; ?>
+
+		<!-- ISPIS SVIH POSTOVA POSTA -->
 		<?php foreach($data['post'] as $post) : ?>
 
 			<div class="col-md-12">
@@ -28,5 +38,11 @@
 
 		<?php endforeach;?>
 	</div>
+
+	<script>
+		setTimeout(function(){
+    document.getElementById("success-alert").style.display="none";
+}, 3000);
+	</script>
 
 <?php require APPROOT . '/view/inc/footer.php' ?>
